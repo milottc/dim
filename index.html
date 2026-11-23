@@ -67,26 +67,30 @@
     <h2>Dim-Dim's Photo Album</h2>
     <div class="gallery-wrapper">
         <button class="gallery-btn" id="galleryPrev" aria-label="Previous image">&#10094;</button>
-        <!-- Change the src below to your first image -->
-        <img id="galleryImage" src="" alt="Dim-Dim photo">
+        <img id="galleryImage" src="20261122_163618.jpg" alt="Dim-Dim photo">
         <button class="gallery-btn" id="galleryNext" aria-label="Next image">&#10095;</button>
     </div>
 </section>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Add your 10 image links here (replace the empty strings)
+        // All 15 images populated
         const galleryImages = [
-            "", // Image 1
-            "", // Image 2
-            "", // Image 3
-            "", // Image 4
-            "", // Image 5
-            "", // Image 6
-            "", // Image 7
-            "", // Image 8
-            "", // Image 9
-            ""  // Image 10
+            "20261122_163618.jpg",
+            "20261122_163617.jpg",
+            "20261122_163528.jpg",
+            "20261122_163526.jpg",
+            "20261122_163520.jpg",
+            "20261111_183528.jpg",
+            "20261106_173033.jpg",
+            "20260824_093107.jpg",
+            "20260804_104134.jpg",
+            "20260511_184117.jpg",
+            "20260315_100503.jpg",
+            "20251223_134648.jpg",
+            "20251214_210343.jpg",
+            "20251214_210339.jpg",
+            "20251124_144717.jpg"
         ];
 
         const imgElement = document.getElementById("galleryImage");
@@ -94,19 +98,12 @@
         const nextBtn = document.getElementById("galleryNext");
         let currentIndex = 0;
 
-        // Set the first image if available
-        if (galleryImages.length > 0 && galleryImages[0] !== "") {
-            imgElement.src = galleryImages[0];
-        }
-
         function updateImage() {
-            if (galleryImages[currentIndex] !== "") {
-                imgElement.style.opacity = 0;
-                setTimeout(() => {
-                    imgElement.src = galleryImages[currentIndex];
-                    imgElement.style.opacity = 1;
-                }, 150);
-            }
+            imgElement.style.opacity = 0;
+            setTimeout(() => {
+                imgElement.src = galleryImages[currentIndex];
+                imgElement.style.opacity = 1;
+            }, 150);
         }
 
         nextBtn.addEventListener("click", () => {
@@ -120,5 +117,7 @@
         });
     });
 </script>
+<!-- END OF GALLERY SECTION -->
+
 <!-- END OF GALLERY SECTION --></main><script src="game.js"></script></html>
 <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5eb181bdd94ebbc',t:'MTc5NTM4MzY0Mw=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5eb181bdd94ebbc',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
