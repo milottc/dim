@@ -1,80 +1,192 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dim-Dim’s 6th Birthday · Bubble Tower</title><link rel="stylesheet" href="style.css">
-<header><div class="brand"><b>✣</b> DIM-DIM ARCADE</div><button id="sound" aria-pressed="true">♫ Sound on</button></header>
-<main><div class="intro"><div><small>DIM-DIM’S BIRTHDAY ADVENTURE</small><h1>Bubble <i>Tower</i></h1></div><p>Happy 6th birthday, Dim-Dim!</p></div>
-<div class="layout"><section class="cab"><div class="strip"><strong id="level"></strong><span id="miss"></span></div><div class="board"><canvas id="game" width="840" height="540" tabindex="0" aria-label="Drag to rotate. Tap a column to shoot. Keyboard players can rotate with arrows and fire with space."></canvas><div class="notice" id="note" aria-live="polite"></div><div class="overlay" id="overlay" hidden><small id="resultTag"></small><strong id="headline"></strong><span id="message"></span><button id="resume"></button></div></div><div class="tray"><span>Next <canvas id="next" width="38" height="38"></canvas></span><button id="swap">⇄ Swap</button><div class="spacer"></div><button id="left" aria-label="Rotate left">↶</button><button id="right" aria-label="Rotate right">↷</button><button id="pause">Ⅱ Pause</button></div></section>
-<aside><div class="mission"><small id="chapter"></small><h2 id="place"></h2><p id="objective"></p><div class="progress"><b id="progress"></b></div><div class="sub"><span id="count"></span><span id="shots"></span></div></div>
-<div class="card"><div class="scores"><div><small>SCORE</small><strong id="score"></strong></div><div><small>BEST</small><strong id="best"></strong></div></div><div class="captain"><img id="img1" src="img1.png" width="72" height="72" alt="Dim-Dim, a grey tabby wearing his birthday hat"><div><small>BIRTHDAY BOY · AGE 6</small><h3>Dim-Dim</h3></div></div><div class="birthday"><b>Dim-Dim’s birthday cake</b><div id="candles"></div><p id="wish"></p></div><div class="power"><b>Rainbow shot</b><span id="chargeText"></span></div><div class="progress"><b id="charge"></b></div></div>
-<div class="card ring"><small>TOWER SCOUT</small><p>Pick a color to rotate that column to the front.</p><div id="scout"></div></div></aside></div>
-<section class="trail"><div class="trailhead"><h2>Trail map</h2><span id="trailCount"></span></div><div class="postcards"><figure><img id="img2" src="img2.png" width="240" height="92" alt="Brick tower in Meadowlands"><figcaption>Meadowlands</figcaption></figure><figure><img id="img3" src="img3.png" width="240" height="92" alt="Brick tower in Autumn Valley"><figcaption>Autumn Valley</figcaption></figure><figure><img id="img4" src="img4.png" width="240" height="92" alt="Brick tower in Glacier Ridge"><figcaption>Glacier Ridge</figcaption></figure><figure><img id="img5" src="img5.png" width="240" height="92" alt="Brick tower in Starfall Summit"><figcaption>Starfall Summit</figcaption></figure></div><div id="route"></div></section>
-<details><summary>How to play &amp; meet the crew</summary><p>Drag to rotate the tower. Tap a column to launch a cat at the outlined landing spot. A gold outline means your shot will pop a group. Match three cats of one color, or cut a cluster loose from the top. Three successful matches charge a rainbow blast.</p><div id="roster"></div><p>← → rotate · Space fires · S swaps · P pauses</p></details>
-<!-- START OF GALLERY SECTION -->
-<style>
-    .dim-dim-gallery {
-        padding: 30px 20px;
-        text-align: center;
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 12px;
-        margin: 20px auto;
-        max-width: 840px;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-    .dim-dim-gallery h2 {
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 15px;
-        color: #ffd700;
-    }
-    .gallery-wrapper {
-        position: relative;
-        display: inline-block;
-        max-width: 100%;
-        overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        background: #111;
-    }
-    #galleryImage {
-        max-height: 400px;
-        max-width: 100%;
-        display: block;
-        object-fit: contain;
-        transition: opacity 0.3s ease;
-    }
-    .gallery-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.6);
-        color: white;
-        border: none;
-        padding: 15px 20px;
-        cursor: pointer;
-        font-size: 24px;
-        border-radius: 50%;
-        z-index: 10;
-        transition: background 0.2s;
-        user-select: none;
-    }
-    .gallery-btn:hover {
-        background: rgba(0, 0, 0, 0.9);
-    }
-    #galleryPrev { left: 10px; }
-    #galleryNext { right: 10px; }
-</style>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dim-Dim’s 6th Birthday · Bubble Tower</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<section class="dim-dim-gallery">
-    <h2>Dim-Dim's Photo Album</h2>
-    <div class="gallery-wrapper">
-        <button class="gallery-btn" id="galleryPrev" aria-label="Previous image">&#10094;</button>
-        <img id="galleryImage" src="20261122_163618.jpg" alt="Dim-Dim photo">
-        <button class="gallery-btn" id="galleryNext" aria-label="Next image">&#10095;</button>
+<header>
+    <div class="brand"><b>✣</b> DIM-DIM ARCADE</div>
+    <button id="sound" aria-pressed="true">♫ Sound on</button>
+</header>
+
+<main>
+    <div class="intro">
+        <div>
+            <small>DIM-DIM’S BIRTHDAY ADVENTURE</small>
+            <h1>Bubble <i>Tower</i></h1>
+        </div>
+        <p>Happy 6th birthday, Dim-Dim!</p>
     </div>
-</section>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // All 15 images populated
+    <div class="layout">
+        <section class="cab">
+            <div class="strip">
+                <strong id="level"></strong>
+                <span id="miss"></span>
+            </div>
+            <div class="board">
+                <canvas id="game" width="840" height="540" tabindex="0" aria-label="Drag to rotate. Tap a column to shoot. Keyboard players can rotate with arrows and fire with space."></canvas>
+                <div class="notice" id="note" aria-live="polite"></div>
+                <div class="overlay" id="overlay" hidden>
+                    <small id="resultTag"></small>
+                    <strong id="headline"></strong>
+                    <span id="message"></span>
+                    <button id="resume"></button>
+                </div>
+            </div>
+            <div class="tray">
+                <span>Next <canvas id="next" width="38" height="38"></canvas></span>
+                <button id="swap">⇄ Swap</button>
+                <div class="spacer"></div>
+                <button id="left" aria-label="Rotate left">↶</button>
+                <button id="right" aria-label="Rotate right">↷</button>
+                <button id="pause">Ⅱ Pause</button>
+            </div>
+        </section>
+
+        <aside>
+            <div class="mission">
+                <small id="chapter"></small>
+                <h2 id="place"></h2>
+                <p id="objective"></p>
+                <div class="progress"><b id="progress"></b></div>
+                <div class="sub"><span id="count"></span><span id="shots"></span></div>
+            </div>
+            <div class="card">
+                <div class="scores">
+                    <div><small>SCORE</small><strong id="score"></strong></div>
+                    <div><small>BEST</small><strong id="best"></strong></div>
+                </div>
+                <div class="captain">
+                    <img id="img1" src="https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/img1.png" width="72" height="72" alt="Dim-Dim, a grey tabby wearing his birthday hat">
+                    <div>
+                        <small>BIRTHDAY BOY · AGE 6</small>
+                        <h3>Dim-Dim</h3>
+                    </div>
+                </div>
+                <div class="birthday">
+                    <b>Dim-Dim’s birthday cake</b>
+                    <div id="candles"></div>
+                    <p id="wish"></p>
+                </div>
+                <div class="power">
+                    <b>Rainbow shot</b>
+                    <span id="chargeText"></span>
+                </div>
+                <div class="progress"><b id="charge"></b></div>
+            </div>
+            <div class="card ring">
+                <small>TOWER SCOUT</small>
+                <p>Pick a color to rotate that column to the front.</p>
+                <div id="scout"></div>
+            </div>
+        </aside>
+    </div>
+
+    <section class="trail">
+        <div class="trailhead">
+            <h2>Trail map</h2>
+            <span id="trailCount"></span>
+        </div>
+        <div class="postcards">
+            <figure>
+                <img id="img2" src="https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/img2.png" width="240" height="92" alt="Brick tower in Meadowlands">
+                <figcaption>Meadowlands</figcaption>
+            </figure>
+            <figure>
+                <img id="img3" src="https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/img3.png" width="240" height="92" alt="Brick tower in Autumn Valley">
+                <figcaption>Autumn Valley</figcaption>
+            </figure>
+            <figure>
+                <img id="img4" src="https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/img4.png" width="240" height="92" alt="Brick tower in Glacier Ridge">
+                <figcaption>Glacier Ridge</figcaption>
+            </figure>
+            <figure>
+                <img id="img5" src="https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/img5.png" width="240" height="92" alt="Brick tower in Starfall Summit">
+                <figcaption>Starfall Summit</figcaption>
+            </figure>
+        </div>
+        <div id="route"></div>
+    </section>
+
+    <details>
+        <summary>How to play &amp; meet the crew</summary>
+        <p>Drag to rotate the tower. Tap a column to launch a cat at the outlined landing spot. A gold outline means your shot will pop a group. Match three cats of one color, or cut a cluster loose from the top. Three successful matches charge a rainbow blast.</p>
+        <div id="roster"></div>
+        <p>← → rotate · Space fires · S swaps · P pauses</p>
+    </details>
+
+    <!-- START OF GALLERY SECTION -->
+    <style>
+        .dim-dim-gallery {
+            padding: 30px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 840px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .dim-dim-gallery h2 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+        .gallery-wrapper {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: #111;
+        }
+        #galleryImage {
+            max-height: 400px;
+            max-width: 100%;
+            display: block;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 24px;
+            border-radius: 50%;
+            z-index: 10;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .gallery-btn:hover { background: rgba(0, 0, 0, 0.9); }
+        #galleryPrev { left: 10px; }
+        #galleryNext { right: 10px; }
+    </style>
+
+    <section class="dim-dim-gallery">
+        <h2>Dim-Dim's Photo Album</h2>
+        <div class="gallery-wrapper">
+            <button class="gallery-btn" id="galleryPrev" aria-label="Previous image">&#10094;</button>
+            <img id="galleryImage" src="https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/20261122_163618.jpg" alt="Dim-Dim photo">
+            <button class="gallery-btn" id="galleryNext" aria-label="Next image">&#10095;</button>
+        </div>
+    </section>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const BASE = "https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/";
+        
         const galleryImages = [
             "20261122_163618.jpg",
             "20261122_163617.jpg",
@@ -91,7 +203,7 @@
             "20251214_210343.jpg",
             "20251214_210339.jpg",
             "20251124_144717.jpg"
-        ];
+        ].map(file => BASE + file);
 
         const imgElement = document.getElementById("galleryImage");
         const prevBtn = document.getElementById("galleryPrev");
@@ -116,8 +228,36 @@
             updateImage();
         });
     });
-</script>
-<!-- END OF GALLERY SECTION -->
+    </script>
+    <!-- END OF GALLERY SECTION -->
 
-<!-- END OF GALLERY SECTION --></main><script src="game.js"></script></html>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5eb181bdd94ebbc',t:'MTc5NTM4MzY0Mw=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5eb181bdd94ebbc',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</main>
+
+<script src="game.js"></script>
+<script>
+(function(){
+    function c(){
+        var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);
+        if(b){
+            var d=b.createElement('script');
+            d.innerHTML="window.__CF$cv$params={r:'a5eb181bdd94ebbc',t:'MTc5NTM4MzY0Mw=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5eb181bdd94ebbc',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName('head')[0].appendChild(d)
+        }
+    }
+    if(document.body){
+        var a=document.createElement('iframe');
+        a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);
+        if('loading'!==document.readyState)c();
+        else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);
+        else{
+            var e=document.onreadystatechange||function(){};
+            document.onreadystatechange=function(b){
+                e(b);
+                'loading'!==document.readyState&&(document.onreadystatechange=e,c())
+            }
+        }
+    }
+})();
+</script>
+</body>
+</html>
