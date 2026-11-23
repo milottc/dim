@@ -62,6 +62,7 @@
                     <div><small>BEST</small><strong id="best"></strong></div>
                 </div>
                 <div class="captain">
+                    <!-- Restored absolute URL for img1 -->
                     <img id="img1" src="https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/img1.png" width="72" height="72" alt="Dim-Dim, a grey tabby wearing his birthday hat">
                     <div>
                         <small>BIRTHDAY BOY · AGE 6</small>
@@ -93,6 +94,7 @@
             <span id="trailCount"></span>
         </div>
         <div class="postcards">
+            <!-- Restored absolute URLs for img2, img3, img4, img5 -->
             <figure>
                 <img id="img2" src="https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/img2.png" width="240" height="92" alt="Brick tower in Meadowlands">
                 <figcaption>Meadowlands</figcaption>
@@ -140,8 +142,11 @@
         }
         .gallery-wrapper {
             position: relative;
-            display: inline-block;
-            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 350px;
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -178,15 +183,15 @@
         <h2>Dim-Dim's Photo Album</h2>
         <div class="gallery-wrapper">
             <button class="gallery-btn" id="galleryPrev" aria-label="Previous image">&#10094;</button>
-            <img id="galleryImage" src="https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/20261122_163618.jpg" alt="Dim-Dim photo">
+            <!-- Relative path for the first gallery image -->
+            <img id="galleryImage" src="20261122_163618.jpg" alt="Dim-Dim photo">
             <button class="gallery-btn" id="galleryNext" aria-label="Next image">&#10095;</button>
         </div>
     </section>
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const BASE = "https://dim-dims-bubble-orbit.meowtam68.chatgpt.site/";
-        
+        // Gallery images use relative paths because they are in the GitHub repo
         const galleryImages = [
             "20261122_163618.jpg",
             "20261122_163617.jpg",
@@ -203,7 +208,7 @@
             "20251214_210343.jpg",
             "20251214_210339.jpg",
             "20251124_144717.jpg"
-        ].map(file => BASE + file);
+        ];
 
         const imgElement = document.getElementById("galleryImage");
         const prevBtn = document.getElementById("galleryPrev");
